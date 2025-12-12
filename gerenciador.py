@@ -8,10 +8,10 @@ class GerenciadorDeReservas:
         self.quartos = []
         self.reservas = []
 
-    def adicionar_clientes (self, cliente):
-        self.clientes.append(Cliente)
+    def adicionar_clientes(self, cliente):
+        self.clientes.append(cliente)
 
-    def listar_clientes (self):
+    def listar_clientes(self):
         for c in self.clientes:
             print(c)
 
@@ -22,27 +22,21 @@ class GerenciadorDeReservas:
         for q in self.quartos:
             print(q)
 
-    def verificar_disponibilidade(self, numero_quarto):
-        for q in self.quartos:
-            if q.numero == numero_quarto:
-                return q.disponivel
-        return False
-    
-    def criar_reserva(self,cliente_id, numero_quarto, checkin, checkout):
+    def criar_reserva(self, cliente_id, numero_quarto, checkin, checkout):
         cliente = next((c for c in self.clientes if c.id_unico == cliente_id), None)
-        quanto = next((q for q in self.quartos if q.numero == numero_quarto), None)
+        quarto = next((q for q in self.quartos if q.numero == numero_quarto), None)
 
         if not cliente:
             print("Cliente não encontrado!")
             return
         
-        if not quanto or not Quarto.disponivel:
+        if not quarto or not quarto.disponivel:
             print("Quarto indisponível!")
             return
         
-        reserva = Reserva(cliente, Quarto, checkin, checkout)
+        reserva = Reserva(cliente, quarto, checkin, checkout)
         self.reservas.append(reserva)
-        quanto.disponivel = False
+        quarto.disponivel = False
 
         print("Reserva criada com sucesso!")
 
@@ -53,10 +47,10 @@ class GerenciadorDeReservas:
             print(r)
 
     def cancelar_reserva(self, numero_quarto):
-         for reserva in self.reservas:
-             if reserva.quarto.numero == numero_quarto and reserva.status ==  "Ativa": 
-                 reserva.status = "Cancelada"
-                 reserva.quarto.disponivel = True
-                 print("Reserva cancelada!")
-                 return
-         print("Reserva não encontrada.")
+        for reserva in self.reservas:
+            if reserva.quarto.numero == numero_quarto and reserva.status == "Ativa":
+                reserva.status = "Cancelada"
+                reserva.quarto.disponivel = True
+                print("Reserva cancelada!")
+                return
+        print("Reserva não encontrada.")
