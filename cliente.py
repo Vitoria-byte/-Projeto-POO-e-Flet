@@ -8,3 +8,4 @@ class Cliente:
     def __str__(self):
         return f"{self.id_unico} - {self.nome} | tel: {self.telefone} | Email: {self.email}"
     
+
