@@ -8,5 +8,5 @@ class Quarto:
     def __str__(self):
         status = "Disponivel" if self.disponivel else "Ocupado"
         return f"Quarto {self.numero} ({self.tipo}) - R$ {self.preco}/dia - {status}"
-    
+
         
